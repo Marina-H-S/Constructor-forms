@@ -1,0 +1,54 @@
+
+/*.bar {
+ padding-left:0;
+ }*/
+
+ .bar button {
+ 	color: #fff;
+
+ }
+
+ .bar button:focus{
+ 	border: 1px solid black;
+ 	box-shadow:none;
+ 	outline: 0;
+ }
+
+ .freme, .list-group-item{
+ 	border:none; 
+ 	color: #fff;
+ }
+
+ .my-list a:first-child{
+ 	border-radius:0; 
+ }
+
+ .my-list a:last-child{
+ 	border-radius:0; 
+ }
+
+ .my-list a {
+ 	color: grey;
+ }
+ .my-list a:hover{
+ 	color: #d5d0d0;
+ }
+
+	.frame {
+		position:fixed;
+		z-index: 9999;
+		top:6%;
+		padding:0;
+		margin: 0;
+	}
+	.frame .col-md-2 {
+		padding: 0;
+	}
+	.frame .row {
+		margin-left:0; 
+	}
+
+	.block{
+		padding-top:6%;
+		border: 1px solid black;
+	}

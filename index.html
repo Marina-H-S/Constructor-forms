@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="main.css">
+	
+	<title>Document</title>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<nav class="navbar nnavbar-dark bg-dark justify-content-between col-md-12 fixed-top bar">
+				<button class="btn col-md-2 bg-dark"  type="button" data-toggle="collapse" data-target="#myCollapse" aria-expanded="false" aria-controls="myCollapse">Option</button>
+
+				<form class="form-inline col-md-8">
+					<input class="form-control mr-sm-2 col-10 bg-dark" id="inp" type="search" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				</form>
+				<button class="btn btn-outline-success" type="button">Sign out</button>
+
+			</nav>
+
+		</div>
+	</div>
+	
+</div>
+<div class="container-fluid frame">
+
+	<div class="collapse" id="myCollapse">
+		<div class="row">
+			<div class="col-md-2">
+				<div class="list-group my-list" id="list-tab" role="tablist">
+					<a class="list-group-item list-group-item-action bg-dark active" id="create" data-toggle="list" href="#list-create" role="tab" aria-controls="create">Create new form</a>
+					<a class="list-group-item list-group-item-action bg-dark" id="forms" data-toggle="list" href="#list-forms" role="tab" aria-controls="forms">All forms</a>
+					<a class="list-group-item list-group-item-action bg-dark" id="results" data-toggle="list" href="#list-results" role="tab" aria-controls="results">Get results</a>
+					<a class="list-group-item list-group-item-action bg-dark" id="statistic" data-toggle="list" href="#list-statistic" role="tab" aria-controls="statistic">Statistic</a>
+				</div>
+			</div>
+			
+		</div>
+		
+	</div>
+
+</div>
+
+<div class="container-fluid">
+	<div class="col-md-10 offset-md-2 block">
+		<div class="tab-content " id="nav-tabContent">
+			<div class="tab-pane fade show active" id="list-create" role="tabpanel" aria-labelledby="create">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam dignissimos ullam placeat natus amet facere voluptatum numquam, beatae eligendi a magnam non eveniet blanditiis consectetur recusandae laboriosam expedita alias autem dolor magni. Saepe magnam odio nobis fugiat vel molestiae, est reiciendis numquam quibusdam. Repellat eum vitae, a vero perspiciatis molestias!
+			</div>
+			<div class="tab-pane fade" id="list-forms" role="tabpanel" aria-labelledby="forms">
+				<div class="row">
+					<div class="col-md-1">
+						#
+					</div>
+					<div class="col-md-4">
+						Name
+					</div>
+					<div class="col-md-2">
+						Creating date
+					</div>
+					<div class="col-md-1">
+						Auther
+					</div>
+					<div class="col-md-1">
+						Passed
+					</div>
+					<div class="col-md-1">
+						Update
+					</div>
+					<div class="col-md-1">
+						Delete
+					</div>
+				</div>
+				<div>
+					
+				</div>
+			</div>
+			<div class="tab-pane fade" id="list-results" role="tabpanel" aria-labelledby="results">3...</div>
+			<div class="tab-pane fade" id="list-statistic" role="tabpanel" aria-labelledby="statistic">...</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="main.js"></script>
+</body>
+</html>

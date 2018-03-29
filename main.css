@@ -52,3 +52,13 @@
 		padding-top:6%;
 		border: 1px solid black;
 	}
+
+#exampleModalLabel {
+	color: #3777cf;
+}
+.modal-body {
+	color: #fff;
+}
+.close{
+	color: red;
+}

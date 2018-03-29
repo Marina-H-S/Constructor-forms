@@ -17,7 +17,7 @@
 					<input class="form-control mr-sm-2 col-10 bg-dark" id="inp" type="search" placeholder="Search" aria-label="Search">
 					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 				</form>
-				<button class="btn btn-outline-success" type="button">Sign out</button>
+				<button class="btn btn-outline-success" type="button" data-toggle="modal" data-target="#exampleModal">Sign in</button>
 
 			</nav>
 
@@ -83,12 +83,83 @@
 	</div>
 </div>
 
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog " role="document">
+		<div class="modal-content bg-dark">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Sign in</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<label for="exampleInputEmail1">Your email</label>
+						<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+						<small id="emailHelp" class="form-text text-muted">It can be any email service.</small>
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">Enter password</label>
+						<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+					</div>
+					
+					
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-success" data-dismiss="modal">Submit</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary"  data-dismiss="modal" data-toggle="modal" data-target="#exampleModal2">
+					Registration
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content bg-dark">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Registration</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<label for="exampleInputEmail1">Your email</label>
+						<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+						<small id="emailHelp" class="form-text text-muted">It can be any email service.</small>
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">Enter password</label>
+						<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword2">Repeat password</label>
+						<input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+					</div>
+					
+					
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-success" data-dismiss="modal">Submit</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				
+				
+			</div>
+		</div>
+	</div>
+</div>
 
 
-
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	<script src="main.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="main.js"></script>
 </body>
 </html>

@@ -1,61 +1,37 @@
-var inp =document.getElementById("inp");
+var inp = document.getElementById("inp");
 var createBlock = document.getElementById("list-create");
 var allTests = document.getElementById("list-forms");
 var test = document.getElementById("forms");
 var dinamicGridTests = allTests.children[1];
 
-inp.onclick = function(){
+inp.onclick = function () {
 	inp.classList.remove("bg-dark");
 };
 
 
-function getData(){
-
-	var first ={
-		name: "first test",
-		createdDate: Date.now(),
-		id: Math.round(Math.random()*10),
-		auther:"Admin",
-		completeTestCounter: Math.round(Math.random()*100)
-	};
-	var second ={
-		name: "second test",
-		createdDate: Date.now(),
-		id: Math.round(Math.random()*10),
-		auther:"Admin",
-		completeTestCounter: Math.round(Math.random()*100)
-	};
-	var third={
-		name: "third test",
-		createdDate: Date.now(),
-		id: Math.round(Math.random()*10),
-		auther:"Admin",
-		completeTestCounter: Math.round(Math.random()*100)
-	};
-	var tests=[];
-	tests.push(first);
-	tests.push(second);
-	tests.push(third);
-
-	var testJson = JSON.stringify(tests);
-	return testJson;
+function getData(callback) {
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function () {
+		if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+			var tests = xmlHttp.responseText;
+			var arrTests = JSON.parse(tests);
+			callback(arrTests);
+		}
+	}
+	xmlHttp.open("GET", window.location.href + 'quiz', true); // true for asynchronous 
+	xmlHttp.send(null);
 };
 
-function parseJson(){
-	var tests = getData();
-	var arrTests = JSON.parse(tests);
-	return arrTests;
-};
-test.onclick =function showAllTests(){
-	var arrTests = parseJson();
+test.onclick = getData(function (tests) {
+	var arrTests = tests;
 	dinamicGridTests.innerHTML = '';
 
-	for (var i=0; i < arrTests.length; i++){
+	for (var i = 0; i < arrTests.length; i++) {
 		var row = document.createElement('div');
 		row.classList.add("row");
 		var number = document.createElement('div');
 		number.classList.add("col-md-1");
-		number.innerHTML = i+1;
+		number.innerHTML = i + 1;
 		row.appendChild(number);
 		var name = document.createElement('div');
 		name.classList.add("col-md-4");
@@ -84,10 +60,8 @@ test.onclick =function showAllTests(){
 		deleteForm.innerHTML = "Delete";
 		row.appendChild(deleteForm);
 		dinamicGridTests.appendChild(row);
-
-
-	}		
-};
+	}
+});
 
 function formatDate(time) {
 	var date = new Date(time);
@@ -102,10 +76,10 @@ function formatDate(time) {
 
 	return dd + '.' + mm + '.' + yy;
 };
-function createForm(){
+function createForm() {
 
-	var title= document.createElement("input");
-	
+	var title = document.createElement("input");
+
 
 
 }

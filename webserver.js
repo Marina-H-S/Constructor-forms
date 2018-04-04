@@ -8,12 +8,14 @@ var http = require("http");
 var path = require("path");
 var fs = require("fs");
 var checkMimeType = true;
+var DB = initData();
 
 console.log("Starting web server at " + serverUrl + ":" + port);
 
 const server = http.createServer( function(req, res) {
 	var now = new Date();
 
+	handleRequest(req,res);
 	var filename = (req.url=='/'?'\\index.html':req.url)||"index.html";
 	var ext = path.extname(filename);
 	var localPath = __dirname;
@@ -71,4 +73,59 @@ function getFile(localPath, res, mimeType) {
 			res.end();
 		}
 	});
+}
+
+function handleRequest(request,response){
+	request.on('error', (err) => {
+		console.error(err);
+		response.statusCode = 400;
+		response.end();
+	  });
+	  response.on('error', (err) => {
+		console.error(err);
+	});
+	//TODO REST for quizes
+	if (request.method === 'POST' && request.url === '/quiz') {
+		response.statusCode = 201;
+		//TODO add logic
+		response.write(DB);
+		response.end();
+	}
+	else if(request.method === 'GET' && request.url === '/quiz'){
+		response.statusCode = 200;
+		response.write(DB);
+		response.end();
+	}
+	return;
+}
+
+function initData(){
+	var first ={
+		name: "first test",
+		createdDate: Date.now(),
+		id: Math.round(Math.random()*10),
+		auther:"Admin",
+		completeTestCounter: Math.round(Math.random()*100)
+	};
+	var second ={
+		name: "second test",
+		createdDate: Date.now(),
+		id: Math.round(Math.random()*10),
+		auther:"Admin",
+		completeTestCounter: Math.round(Math.random()*100)
+	};
+	var third={
+		name: "third test",
+		createdDate: Date.now(),
+		id: Math.round(Math.random()*10),
+		auther:"Admin",
+		completeTestCounter: Math.round(Math.random()*100)
+	};
+	var tests=[];
+	tests.push(first);
+	tests.push(second);
+	tests.push(third);
+
+	var testJson = JSON.stringify(tests);
+	return testJson;
 }

@@ -23,6 +23,8 @@ function getData(callback) {
 };
 
 test.onclick = getData(function (tests) {
+	//TODO sample how to check user role
+	var isAdmin = auth.isInRole('admin');
 	var arrTests = tests;
 	dinamicGridTests.innerHTML = '';
 

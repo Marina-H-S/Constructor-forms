@@ -1,25 +1,34 @@
 auth = (function(){
   return {
     getRoles: getRoles,
-    isInRole: isInRole
+    isInRole: isInRole,
+    getUserId: getUserId
   };
 
   function isInRole(role){
     return getRoles()&&getRoles().indexOf(role)!=-1;
-  }
+  };
 
   function getRoles(){
     var idToken = localStorage.getItem('id_token');
     var payload = parseJwt(idToken);
     var roles = payload['http://constructor-forms/roles'];
     return roles;
-  }
+  };
 
-  function parseJwt (token) {
+  function getUserId(){
+    var idToken = localStorage.getItem('id_token');
+    var payload = parseJwt(idToken);
+    var id = payload['sub'];
+    return id;
+  };
+
+  function parseJwt(token) {
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64));
-};
+  };
+
 })();
 
 window.addEventListener('load', function() {

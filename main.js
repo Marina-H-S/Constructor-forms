@@ -8,23 +8,13 @@ inp.onclick = function () {
 	inp.classList.remove("bg-dark");
 };
 
-
-function getData(callback) {
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.onreadystatechange = function () {
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-			var tests = xmlHttp.responseText;
-			var arrTests = JSON.parse(tests);
-			callback(arrTests);
-		}
-	}
-	xmlHttp.open("GET", window.location.href + 'quiz', true); // true for asynchronous 
-	xmlHttp.send(null);
-};
-
 test.onclick = getData(function (tests) {
+
 	//TODO sample how to check user role
 	var isAdmin = auth.isInRole('admin');
+	//TODO sapme how to get current user id
+	var userId = auth.getUserId();
+
 	var arrTests = tests;
 	dinamicGridTests.innerHTML = '';
 
@@ -65,6 +55,19 @@ test.onclick = getData(function (tests) {
 	}
 });
 
+function getData(callback) {
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function () {
+		if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+			var tests = xmlHttp.responseText;
+			var arrTests = JSON.parse(tests);
+			callback(arrTests);
+		}
+	}
+	xmlHttp.open("GET", window.location.href + 'quiz', true); // true for asynchronous 
+	xmlHttp.send(null);
+};
+
 function formatDate(time) {
 	var date = new Date(time);
 	var dd = date.getDate();
@@ -78,6 +81,7 @@ function formatDate(time) {
 
 	return dd + '.' + mm + '.' + yy;
 };
+
 function createForm() {
 
 	var title = document.createElement("input");

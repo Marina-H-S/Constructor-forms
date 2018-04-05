@@ -88,12 +88,13 @@ function handleRequest(request,response){
 	if (request.method === 'POST' && request.url === '/quiz') {
 		response.statusCode = 201;
 		//TODO add logic
-		response.write(DB);
+
+		response.write(JSON.stringify(DB));
 		response.end();
 	}
 	else if(request.method === 'GET' && request.url === '/quiz'){
 		response.statusCode = 200;
-		response.write(DB);
+		response.write(JSON.stringify(DB));
 		response.end();
 	}
 	return;
@@ -126,6 +127,5 @@ function initData(){
 	tests.push(second);
 	tests.push(third);
 
-	var testJson = JSON.stringify(tests);
-	return testJson;
+	return tests;
 }

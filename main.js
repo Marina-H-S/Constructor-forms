@@ -8,7 +8,43 @@ inp.onclick = function () {
 	inp.classList.remove("bg-dark");
 };
 
-test.onclick = getData(function (tests) {
+test.onclick = getData;
+
+function getData() {
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function () {
+		if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+			var tests = xmlHttp.responseText;
+			var arrTests = JSON.parse(tests);
+			buildGrid(arrTests);
+		}
+	}
+	xmlHttp.open("GET", window.location.href + 'quiz', true); // true for asynchronous 
+	xmlHttp.send(null);
+};
+
+function addQuiz(quiz){
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function () {
+		if (xmlHttp.readyState == 4 && xmlHttp.status == 201){
+			var tests = xmlHttp.responseText;
+			var arrTests = JSON.parse(tests);
+			buildGrid(arrTests);
+		}
+	}
+	xmlHttp.open("POST", window.location.href + 'quiz', true); // true for asynchronous 
+	//TODO use real quiz instead of this mock
+	//xmlHttp.send(quiz);
+	xmlHttp.send({
+		name: "fourth test",
+		createdDate: Date.now(),
+		id: Math.round(Math.random()*10),
+		auther:"Admin",
+		completeTestCounter: Math.round(Math.random()*100)
+	});
+}
+
+function buildGrid(tests) {
 
 	//TODO sample how to check user role
 	var isAdmin = auth.isInRole('admin');
@@ -53,20 +89,7 @@ test.onclick = getData(function (tests) {
 		row.appendChild(deleteForm);
 		dinamicGridTests.appendChild(row);
 	}
-});
-
-function getData(callback) {
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.onreadystatechange = function () {
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-			var tests = xmlHttp.responseText;
-			var arrTests = JSON.parse(tests);
-			callback(arrTests);
-		}
-	}
-	xmlHttp.open("GET", window.location.href + 'quiz', true); // true for asynchronous 
-	xmlHttp.send(null);
-};
+}
 
 function formatDate(time) {
 	var date = new Date(time);

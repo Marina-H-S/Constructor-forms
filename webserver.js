@@ -88,9 +88,22 @@ function handleRequest(request,response){
 	if (request.method === 'POST' && request.url === '/quiz') {
 		response.statusCode = 201;
 		//TODO add logic
-
-		response.write(JSON.stringify(DB));
-		response.end();
+		let requestBody = '';
+		request.setEncoding('utf8');
+		request.on('data', function(chunk){
+			requestBody+=chunk;
+		});
+		request.on('end',function(){
+			try {
+				const data = JSON.parse(requestBody);
+				DB.push(data);
+				response.write(JSON.stringify(DB));
+				response.end();
+			  } catch (error) {
+				response.statusCode = 400;
+				return response.end(`error: ${error.message}`);
+			  }
+		})
 	}
 	else if(request.method === 'GET' && request.url === '/quiz'){
 		response.statusCode = 200;

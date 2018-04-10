@@ -37,13 +37,13 @@ function addQuiz(quiz){
 	xmlHttp.open("POST", window.location.href + 'quiz', true); // true for asynchronous 
 	//TODO use real quiz instead of this mock
 	//xmlHttp.send(quiz);
-	xmlHttp.send({
+	xmlHttp.send(JSON.stringify({
 		name: "fourth test",
 		createdDate: Date.now(),
 		id: Math.round(Math.random()*10),
 		auther:"Admin",
 		completeTestCounter: Math.round(Math.random()*100)
-	});
+	}));
 }
 
 function buildGrid(tests) {

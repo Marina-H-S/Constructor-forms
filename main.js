@@ -16,7 +16,7 @@ function getData() {
 			buildGrid(arrTests);
 		}
 	}
-	xmlHttp.open("GET", window.location.href + 'quiz', true); // true for asynchronous 
+	xmlHttp.open("GET", window.location.href.replace('#','') + 'quiz', true); // true for asynchronous 
 	xmlHttp.send(null);
 };
 
@@ -29,7 +29,7 @@ function addQuiz(quiz){
 			buildGrid(arrTests);
 		}
 	}
-	xmlHttp.open("POST", window.location.href + 'quiz', true); // true for asynchronous 
+	xmlHttp.open("POST", window.location.href.replace('#','') + 'quiz', true); // true for asynchronous 
 	//TODO use real quiz instead of this mock
 	//xmlHttp.send(JSON.stringify(quiz));
 	xmlHttp.send(JSON.stringify({

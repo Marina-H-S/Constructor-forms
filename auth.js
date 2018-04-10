@@ -88,6 +88,7 @@ window.addEventListener('load', function() {
       localStorage.removeItem('id_token');
       localStorage.removeItem('expires_at');
       displayButtons();
+      window.location.reload();
     }
   
     function isAuthenticated() {

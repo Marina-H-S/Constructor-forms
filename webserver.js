@@ -16,7 +16,7 @@ const server = http.createServer(function (req, res) {
 	var now = new Date();
 
 	handleRequest(req, res);
-	var filename = (req.url == '/'|| req.url == '/#' ? '/index.html' : req.url) || "index.html";
+	var filename = (req.url == '/' ? '/index.html' : req.url) || "index.html";
 	var ext = path.extname(filename);
 	var localPath = __dirname;
 	var validExtensions = {

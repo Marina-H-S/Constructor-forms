@@ -1,14 +1,9 @@
-var inp = document.getElementById("inp");
 var createBlock = document.getElementById("list-create");
 var allTests = document.getElementById("list-forms");
 var test = document.getElementById("forms");
 var dinamicGridTests = allTests.children[1];
 var form = document.getElementById("create-form");
 var addQuestion = document.getElementById("create-question");
-
-inp.onclick = function () {
-	inp.classList.remove("bg-dark");
-};
 
 test.onclick = getData;
 
@@ -36,7 +31,7 @@ function addQuiz(quiz){
 	}
 	xmlHttp.open("POST", window.location.href + 'quiz', true); // true for asynchronous 
 	//TODO use real quiz instead of this mock
-	//xmlHttp.send(quiz);
+	//xmlHttp.send(JSON.stringify(quiz));
 	xmlHttp.send(JSON.stringify({
 		name: "fourth test",
 		createdDate: Date.now(),

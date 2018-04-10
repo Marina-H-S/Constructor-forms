@@ -3,6 +3,8 @@ var createBlock = document.getElementById("list-create");
 var allTests = document.getElementById("list-forms");
 var test = document.getElementById("forms");
 var dinamicGridTests = allTests.children[1];
+var form = document.getElementById("create-form");
+var addQuestion = document.getElementById("create-question");
 
 inp.onclick = function () {
 	inp.classList.remove("bg-dark");
@@ -77,11 +79,6 @@ function buildGrid(tests) {
 		number.classList.add("col-md-1");
 		number.innerHTML = arrTests[i].completeTestCounter;
 		row.appendChild(number);
-		var updateForm = document.createElement('button');
-		updateForm.classList.add("col-md-1");
-		updateForm.classList.add(arrTests[i].id);
-		updateForm.innerHTML = "Update";
-		row.appendChild(updateForm);
 		var deleteForm = document.createElement('button');
 		deleteForm.classList.add(arrTests[i].id);
 		deleteForm.classList.add("col-md-1");
@@ -89,7 +86,7 @@ function buildGrid(tests) {
 		row.appendChild(deleteForm);
 		dinamicGridTests.appendChild(row);
 	}
-}
+};
 
 function formatDate(time) {
 	var date = new Date(time);
@@ -104,11 +101,26 @@ function formatDate(time) {
 
 	return dd + '.' + mm + '.' + yy;
 };
+addQuestion.onclick = function () {
+	var div = document.createElement("div")
+	
+	form.appendChild(div);
+	var titleQuestion = document.createElement("input");
+	titleQuestion.setAttribute("placeholder","Enter question");
+	titleQuestion.classList.add("col-md-10");
+	div.appendChild(titleQuestion);
+	div.appendChild(addOption());
+	var addOptionBtn = document.createElement("button");
+	addOptionBtn.innerHTML = "add option";
+	form.appendChild(addOptionBtn);
+	addOptionBtn.onclick = function (){
+		div.appendChild(addOption());
+	};
+};
 
-function createForm() {
-
-	var title = document.createElement("input");
-
-
-
-}
+function addOption() {
+	var option = document.createElement("input");
+	option.setAttribute("placeholder","Enter option");
+	option.classList.add("col-md-10");
+	return option;
+};

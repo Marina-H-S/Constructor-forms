@@ -53,7 +53,7 @@ function buildGrid(tests) {
 
 	for (var i = 0; i < arrTests.length; i++) {
 		var row = document.createElement('div');
-		row.classList.add("row");
+		row.classList.add("row","string");
 		var number = document.createElement('div');
 		number.classList.add("col-md-1");
 		number.innerHTML = i + 1;
@@ -75,11 +75,13 @@ function buildGrid(tests) {
 		number.innerHTML = arrTests[i].completeTestCounter;
 		row.appendChild(number);
 		var deleteForm = document.createElement('button');
-		deleteForm.classList.add(arrTests[i].id);
-		deleteForm.classList.add("col-md-1");
+		deleteForm.classList.add(arrTests[i].id,"btn-outline-danger","btn");
 		deleteForm.innerHTML = "Delete";
 		row.appendChild(deleteForm);
+		var hr = document.createElement('hr');
+		row.appendChild(hr);
 		dinamicGridTests.appendChild(row);
+
 	}
 };
 
@@ -97,25 +99,34 @@ function formatDate(time) {
 	return dd + '.' + mm + '.' + yy;
 };
 addQuestion.onclick = function () {
-	var div = document.createElement("div")
-	
+	var div = document.createElement("div");
+	div.classList.add("question-blok");
 	form.appendChild(div);
+	var wrap = document.createElement("div");
+	wrap.classList.add("input-group");
+	div.appendChild(wrap);
 	var titleQuestion = document.createElement("input");
 	titleQuestion.setAttribute("placeholder","Enter question");
-	titleQuestion.classList.add("col-md-10");
-	div.appendChild(titleQuestion);
-	div.appendChild(addOption());
+	titleQuestion.setAttribute("aria-describedby","basic-addon2");
+	titleQuestion.classList.add("col-md-10", "form-control");
+	wrap.appendChild(titleQuestion); 
+	var btnWrap = document.createElement("div");
+	btnWrap.classList.add("input-group-append");
 	var addOptionBtn = document.createElement("button");
 	addOptionBtn.innerHTML = "add option";
-	form.appendChild(addOptionBtn);
+	addOptionBtn.classList.add("btn", "btn-outline-success");
+	btnWrap.appendChild(addOptionBtn);
+	wrap.appendChild(btnWrap);
+	div.appendChild(addOption());
 	addOptionBtn.onclick = function (){
 		div.appendChild(addOption());
+		var hr = document.createElement('hr');
 	};
 };
 
 function addOption() {
 	var option = document.createElement("input");
 	option.setAttribute("placeholder","Enter option");
-	option.classList.add("col-md-10");
+	option.classList.add("col-md-10", "form-control");
 	return option;
 };

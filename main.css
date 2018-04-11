@@ -1,64 +1,24 @@
 
-/*.bar {
- padding-left:0;
- }*/
 
- .bar button {
- 	color: #fff;
-
- }
-
- .bar button:focus{
- 	border: 1px solid black;
- 	box-shadow:none;
- 	outline: 0;
- }
-
- .freme, .list-group-item{
- 	border:none; 
- 	color: #fff;
- }
-
- .my-list a:first-child{
- 	border-radius:0; 
- }
-
- .my-list a:last-child{
- 	border-radius:0; 
- }
-
- .my-list a {
+ .nav-pills a {
  	color: grey;
  }
- .my-list a:hover{
- 	color: #d5d0d0;
- }
 
-	.frame {
-		position:fixed;
-		z-index: 9999;
-		top:6%;
-		padding:0;
-		margin: 0;
-	}
-	.frame .col-md-2 {
-		padding: 0;
-	}
-	.frame .row {
-		margin-left:0; 
-	}
 
 	.block{
-		padding-top:6%;
+		padding-top:8%;
 		border: 1px solid black;
+		/*color: white;*/
 	}
-
-#exampleModalLabel {
-	color: #3777cf;
+.string {
+	margin: 5px;
+	 }
+.question-blok {
+	margin: 25px;
+	box-shadow: 0px 0px 11px 4px rgba(219,215,219,1);
+	background: #eae8e8;
+	padding: 10px 0 10px;
 }
-.modal-body {
-	color: #fff;
-}
-.close{
-	color: red;
+input {
+	margin: 10px;
 }

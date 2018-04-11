@@ -89,7 +89,8 @@ function serveFile(req,res){
 		".gif": "image/gif",
 		".png": "image/png",
 		".woff": "application/font-woff",
-		".woff2": "application/font-woff2"
+		".woff2": "application/font-woff2",
+		".ico": "image/x-icon"
 	};
 
 	var validMimeType = true;

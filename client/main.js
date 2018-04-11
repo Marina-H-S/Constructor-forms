@@ -4,8 +4,10 @@ var test = document.getElementById("forms");
 var dinamicGridTests = allTests.children[1];
 var form = document.getElementById("create-form");
 var addQuestion = document.getElementById("create-question");
+var saveForm = document.getElementById("save-form");
 
 test.onclick = function(){services.quiz.GET(buildGrid)};
+saveForm.onclick = createObjForm;
 
 function buildGrid(tests) {
 
@@ -96,3 +98,24 @@ function addOption() {
 	option.classList.add("col-md-10", "form-control");
 	return option;
 };
+
+function createObjForm(){
+	var formObj ={};
+	formObj.name = form.children[0].value;
+	formObj.description = form.children[1].value;
+	var questionsArr = [];
+	for (var i =2; i<form.children.length; i++){
+		var question = {};
+		question.name = form.children[i].children[0].children[0].value;
+		question.optionArr= [];
+		if(form.children[i].children.length < 2) continue;
+		for (var j =1; j<form.children[i].children.length; j++){
+			question.optionArr.push(form.children[i].children[j].value);
+		};
+		questionsArr.push(question);
+	};
+	formObj.questions = questionsArr;
+	console.log(formObj);
+	return formObj;
+};
+

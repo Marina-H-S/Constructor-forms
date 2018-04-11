@@ -5,41 +5,7 @@ var dinamicGridTests = allTests.children[1];
 var form = document.getElementById("create-form");
 var addQuestion = document.getElementById("create-question");
 
-test.onclick = getData;
-
-function getData() {
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.onreadystatechange = function () {
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-			var tests = xmlHttp.responseText;
-			var arrTests = JSON.parse(tests);
-			buildGrid(arrTests);
-		}
-	}
-	xmlHttp.open("GET", window.location.href.replace('#','') + 'quiz', true); // true for asynchronous 
-	xmlHttp.send(null);
-};
-
-function addQuiz(quiz){
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.onreadystatechange = function () {
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 201){
-			var tests = xmlHttp.responseText;
-			var arrTests = JSON.parse(tests);
-			buildGrid(arrTests);
-		}
-	}
-	xmlHttp.open("POST", window.location.href.replace('#','') + 'quiz', true); // true for asynchronous 
-	//TODO use real quiz instead of this mock
-	//xmlHttp.send(JSON.stringify(quiz));
-	xmlHttp.send(JSON.stringify({
-		name: "fourth test",
-		createdDate: Date.now(),
-		id: Math.round(Math.random()*10),
-		auther:"Admin",
-		completeTestCounter: Math.round(Math.random()*100)
-	}));
-}
+test.onclick = function(){services.quiz.GET(buildGrid)};
 
 function buildGrid(tests) {
 

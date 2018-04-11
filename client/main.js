@@ -6,8 +6,13 @@ var form = document.getElementById("create-form");
 var addQuestion = document.getElementById("create-question");
 var saveForm = document.getElementById("save-form");
 
-test.onclick = function(){services.quiz.GET(buildGrid)};
-saveForm.onclick = createObjForm;
+test.onclick = function(){
+	services.quiz.GET(buildGrid);
+};
+saveForm.onclick = function(){
+	var quiz = createObjForm();
+	services.quiz.POST(quiz,buildGrid);
+};
 
 function buildGrid(tests) {
 
@@ -49,7 +54,6 @@ function buildGrid(tests) {
 		var hr = document.createElement('hr');
 		row.appendChild(hr);
 		dinamicGridTests.appendChild(row);
-
 	}
 };
 
@@ -66,6 +70,7 @@ function formatDate(time) {
 
 	return dd + '.' + mm + '.' + yy;
 };
+
 addQuestion.onclick = function () {
 	var div = document.createElement("div");
 	div.classList.add("question-blok");
@@ -86,9 +91,9 @@ addQuestion.onclick = function () {
 	btnWrap.appendChild(addOptionBtn);
 	wrap.appendChild(btnWrap);
 	div.appendChild(addOption());
-	addOptionBtn.onclick = function (){
+	addOptionBtn.onclick = function (e){
+		e.preventDefault();
 		div.appendChild(addOption());
-		var hr = document.createElement('hr');
 	};
 };
 

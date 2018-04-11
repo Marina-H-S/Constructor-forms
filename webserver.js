@@ -51,7 +51,6 @@ function handleRequest(request, response) {
 		});
 		request.on('end', function () {
 			let data = JSON.parse(requestBody);
-			data.id = GenerateId();
 			DB.push(data);
 			response.write(JSON.stringify(DB));
 			response.end();

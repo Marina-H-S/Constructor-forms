@@ -9,6 +9,7 @@ services = (function() {
     }
     
     function getQuizes(callback) {
+        console.log('getting quizes');
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function () {
             if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
@@ -22,6 +23,7 @@ services = (function() {
     };
     
     function addQuiz(quiz,callback){
+        console.log('adding quizes');
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function () {
             if (xmlHttp.readyState == 4 && xmlHttp.status == 201){
@@ -30,19 +32,12 @@ services = (function() {
                 callback(arrTests);
             }
         }
-        xmlHttp.open("POST", window.location.href.replace('#','') + 'quiz', true); // true for asynchronous 
-        //TODO use real quiz instead of this mock
-        //xmlHttp.send(JSON.stringify(quiz));
-        xmlHttp.send(JSON.stringify({
-            name: "fourth test",
-            createdDate: Date.now(),
-            id: Math.round(Math.random()*10),
-            auther:"Admin",
-            completeTestCounter: Math.round(Math.random()*100)
-        }));
+        xmlHttp.open("POST", window.location.href.replace('#','') + 'quiz', true);
+        xmlHttp.send(JSON.stringify(quiz));
     }
     
     function deleteQuiz(id,callback){
+        console.log('deleting quizes');
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function () {
             if (xmlHttp.readyState == 4 && xmlHttp.status == 201){

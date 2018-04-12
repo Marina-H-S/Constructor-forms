@@ -41,10 +41,9 @@ services = (function() {
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function () {
             if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-                debugger
                 var tests = xmlHttp.responseText;
-                var arrTests = JSON.parse(tests);
-                callback(arrTests);
+                // var arrTests = JSON.parse(tests);
+                callback(id);
             }
         }
         xmlHttp.open("DELETE", window.location.href.replace('#','') + 'quiz'+'/'+id, true);

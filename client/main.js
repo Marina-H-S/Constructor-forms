@@ -27,10 +27,10 @@ function buildGrid(tests) {
 	for (var i = 0; i < arrTests.length; i++) {
 		var row = document.createElement('div');
 		row.classList.add("row","string");
-		var number = document.createElement('div');
-		number.classList.add("col-md-1");
-		number.innerHTML = i + 1;
-		row.appendChild(number);
+		// var number = document.createElement('div');
+		// number.classList.add("col-md-1");
+		// number.innerHTML = i + 1;
+		// row.appendChild(number);
 		var name = document.createElement('div');
 		name.classList.add("col-md-4");
 		name.innerHTML = arrTests[i].name;
@@ -55,11 +55,16 @@ function buildGrid(tests) {
 		deleteForm.onclick = function (e){
 			var id = this.classList[0];
 			e.preventDefault();
-			services.quiz.DELETE(id,buildGrid);
+			services.quiz.DELETE(id,deleteElem);
 		};
 
 	};
 };
+
+function deleteElem(id){
+	var elem = document.getElementsByClassName(id)[0];
+	elem.parentElement.remove();
+	};
 
 
 addQuestion.onclick = function () {
@@ -78,7 +83,7 @@ addQuestion.onclick = function () {
 	btnWrap.classList.add("input-group-append");
 	var addOptionBtn = document.createElement("button");
 	addOptionBtn.innerHTML = "add option";
-	addOptionBtn.classList.add("btn", "btn-success");
+	addOptionBtn.classList.add("btn", "btn-success", "my-btn");
 	btnWrap.appendChild(addOptionBtn);
 	
 	wrap.appendChild(btnWrap);
@@ -89,7 +94,7 @@ addQuestion.onclick = function () {
 	};
 	var deleteQuestionBtn = document.createElement("button");
 	deleteQuestionBtn.innerHTML = "X";
-	deleteQuestionBtn.classList.add("btn", "btn-danger", "offset-md-1")
+	deleteQuestionBtn.classList.add("btn", "btn-danger", "my-btn")
 	wrap.appendChild(deleteQuestionBtn);
 	deleteQuestionBtn.onclick =function(){
 	div.remove();
@@ -105,7 +110,7 @@ function addOption() {
 	wrapOpt.appendChild(option); 
 	var deleteOptionBtn = document.createElement("button");
 	deleteOptionBtn.innerHTML = "X";
-	deleteOptionBtn.classList.add("btn", "btn-danger")
+	deleteOptionBtn.classList.add("btn", "btn-danger", "my-btn")
 	wrapOpt.appendChild(deleteOptionBtn);
 	deleteOptionBtn.onclick =function(){
 	wrapOpt.remove();
@@ -129,7 +134,7 @@ function createObjForm(){
 		questionsArr.push(question);
 	};
 	formObj.questions = questionsArr;
-	formObj.id = Math.round(Math.random() * 10);
+	formObj.id = Math.round(Math.random() * 1000);
 	formObj.createdDate = Date.now();
 	var userRole = auth.getRoles();
 	formObj.auther = userRole[0];

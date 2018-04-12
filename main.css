@@ -14,10 +14,10 @@
 	margin: 5px;
 	 }
 .question-blok {
-	margin-top: 25px;
+	margin: 25px;
 	box-shadow: 0px 0px 11px 4px rgba(219,215,219,1);
 	background: #eae8e8;
-	padding: 10px 0 10px;
+	padding: 10px 5px 10px;
 }
 input {
 	margin: 10px 0 10px 5px;
@@ -29,6 +29,9 @@ input {
 /*.input-group-append {
 	margin-left:1%;
 }*/
-.btn {
+.my-btn {
 	margin-top: 10px;
+}
+.super-btn {
+	margin: 10px;
 }

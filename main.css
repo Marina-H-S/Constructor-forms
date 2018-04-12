@@ -6,7 +6,7 @@
 
 
 	.block{
-		padding-top:8%;
+		margin-top:8%;
 		border: 1px solid black;
 		/*color: white;*/
 	}
@@ -20,18 +20,27 @@
 	padding: 10px 5px 10px;
 }
 input {
-	margin: 10px 0 10px 5px;
+	margin: 25px 0 0 5px;
 }
-/*.input-group input {
-	margin: 0;
-	margin-left: 5px;
-}*/
-/*.input-group-append {
-	margin-left:1%;
-}*/
+
 .my-btn {
-	margin-top: 10px;
+	margin-top: 25px;
 }
 .super-btn {
 	margin: 10px;
+}
+.input-error {
+	border: 2px solid red;
+}
+.error {
+	color: red;
+	position: absolute;
+	display: block;
+	
+
+	background-color: rgba(255,0,0,.1);
+}
+#create-form {
+	padding: 5px;
+	position: relative;
 }

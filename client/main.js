@@ -6,12 +6,18 @@ var form = document.getElementById("create-form");
 var addQuestion = document.getElementById("create-question");
 var saveForm = document.getElementById("save-form");
 
+
+
 test.onclick = function(){
 	services.quiz.GET(buildGrid);
 };
 saveForm.onclick = function(){
-	var quiz = createObjForm();
-	services.quiz.POST(quiz,buildGrid);
+	if (!validationForm()) {
+		console.log('valid error')
+	}else{
+		var quiz = createObjForm();
+		services.quiz.POST(quiz,buildGrid);
+	}
 };
 
 function buildGrid(tests) {
@@ -64,7 +70,7 @@ function buildGrid(tests) {
 function deleteElem(id){
 	var elem = document.getElementsByClassName(id)[0];
 	elem.parentElement.remove();
-	};
+};
 
 
 addQuestion.onclick = function () {
@@ -97,7 +103,7 @@ addQuestion.onclick = function () {
 	deleteQuestionBtn.classList.add("btn", "btn-danger", "my-btn")
 	wrap.appendChild(deleteQuestionBtn);
 	deleteQuestionBtn.onclick =function(){
-	div.remove();
+		div.remove();
 	}
 };
 
@@ -113,7 +119,7 @@ function addOption() {
 	deleteOptionBtn.classList.add("btn", "btn-danger", "my-btn")
 	wrapOpt.appendChild(deleteOptionBtn);
 	deleteOptionBtn.onclick =function(){
-	wrapOpt.remove();
+		wrapOpt.remove();
 	}
 	return wrapOpt;
 };
@@ -144,5 +150,30 @@ function createObjForm(){
 	return formObj;
 };
 
+function validationForm(){
+	var isValid = true;
+	var inputList = form.querySelectorAll("input");
+	for (var i=0; i<inputList.length; i++){
+		if(inputList[i].value.trim() === ""){
+			if (!(inputList[i].previousElementSibling && inputList[i].previousElementSibling.classList.contains("error"))){
+				inputList[i].insertAdjacentHTML("beforeBegin", '<div class="error">Please fill this field</div>');
+				inputList[i].classList.add("input-error");
+			}
+			isValid = false;
+		}
+	}
+	return isValid;
+
+};
+form.onclick = function(e){
+	var target = event.target;
+	if(target.tagName =="INPUT"){
+		target.classList.remove("input-error");
+		var sibling = target.previousElementSibling;
+		if (sibling && sibling.classList && sibling.classList.contains("error")) {
+			sibling.remove();
+		};
+	};
+};
 
 

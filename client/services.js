@@ -40,7 +40,8 @@ services = (function() {
         console.log('deleting quizes');
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function () {
-            if (xmlHttp.readyState == 4 && xmlHttp.status == 201){
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+                debugger
                 var tests = xmlHttp.responseText;
                 var arrTests = JSON.parse(tests);
                 callback(arrTests);

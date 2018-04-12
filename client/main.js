@@ -37,7 +37,7 @@ function buildGrid(tests) {
 		row.appendChild(name);
 		var date = document.createElement('div');
 		date.classList.add("col-md-2");
-		date.innerHTML = formatDate(arrTests[i].createdDate);
+		date.innerHTML = utilities.formatDate(arrTests[i].createdDate);
 		row.appendChild(date);
 		var auther = document.createElement('div');
 		auther.classList.add("col-md-1");
@@ -48,28 +48,19 @@ function buildGrid(tests) {
 		number.innerHTML = arrTests[i].completeTestCounter;
 		row.appendChild(number);
 		var deleteForm = document.createElement('button');
-		deleteForm.classList.add(arrTests[i].id,"btn-outline-danger","btn");
+		deleteForm.classList.add(arrTests[i].id, "btn-outline-danger","btn");
 		deleteForm.innerHTML = "Delete";
 		row.appendChild(deleteForm);
-		var hr = document.createElement('hr');
-		row.appendChild(hr);
 		dinamicGridTests.appendChild(row);
-	}
+		deleteForm.onclick = function (e){
+			var id = this.classList[0];
+			e.preventDefault();
+			services.quiz.DELETE(id,buildGrid);
+		};
+
+	};
 };
 
-function formatDate(time) {
-	var date = new Date(time);
-	var dd = date.getDate();
-	if (dd < 10) dd = '0' + dd;
-
-	var mm = date.getMonth() + 1;
-	if (mm < 10) mm = '0' + mm;
-
-	var yy = date.getFullYear() % 100;
-	if (yy < 10) yy = '0' + yy;
-
-	return dd + '.' + mm + '.' + yy;
-};
 
 addQuestion.onclick = function () {
 	var div = document.createElement("div");
@@ -87,21 +78,39 @@ addQuestion.onclick = function () {
 	btnWrap.classList.add("input-group-append");
 	var addOptionBtn = document.createElement("button");
 	addOptionBtn.innerHTML = "add option";
-	addOptionBtn.classList.add("btn", "btn-outline-success");
+	addOptionBtn.classList.add("btn", "btn-success");
 	btnWrap.appendChild(addOptionBtn);
+	
 	wrap.appendChild(btnWrap);
 	div.appendChild(addOption());
 	addOptionBtn.onclick = function (e){
 		e.preventDefault();
 		div.appendChild(addOption());
 	};
+	var deleteQuestionBtn = document.createElement("button");
+	deleteQuestionBtn.innerHTML = "X";
+	deleteQuestionBtn.classList.add("btn", "btn-danger", "offset-md-1")
+	wrap.appendChild(deleteQuestionBtn);
+	deleteQuestionBtn.onclick =function(){
+	div.remove();
+	}
 };
 
 function addOption() {
+	var wrapOpt = document.createElement("div");
+	wrapOpt.classList.add("input-group");
 	var option = document.createElement("input");
 	option.setAttribute("placeholder","Enter option");
 	option.classList.add("col-md-10", "form-control");
-	return option;
+	wrapOpt.appendChild(option); 
+	var deleteOptionBtn = document.createElement("button");
+	deleteOptionBtn.innerHTML = "X";
+	deleteOptionBtn.classList.add("btn", "btn-danger")
+	wrapOpt.appendChild(deleteOptionBtn);
+	deleteOptionBtn.onclick =function(){
+	wrapOpt.remove();
+	}
+	return wrapOpt;
 };
 
 function createObjForm(){
@@ -115,12 +124,20 @@ function createObjForm(){
 		question.optionArr= [];
 		if(form.children[i].children.length < 2) continue;
 		for (var j =1; j<form.children[i].children.length; j++){
-			question.optionArr.push(form.children[i].children[j].value);
+			question.optionArr.push(form.children[i].children[j].children[0].value);
 		};
 		questionsArr.push(question);
 	};
 	formObj.questions = questionsArr;
+	formObj.id = Math.round(Math.random() * 10);
+	formObj.createdDate = Date.now();
+	var userRole = auth.getRoles();
+	formObj.auther = userRole[0];
+	//TO DO completeTestCounter
+	formObj.completeTestCounter =0; 
 	console.log(formObj);
 	return formObj;
 };
+
+
 

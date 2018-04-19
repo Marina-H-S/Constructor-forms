@@ -5,6 +5,13 @@ var dinamicGridTests = allTests.children[1];
 var form = document.getElementById("create-form");
 var addQuestion = document.getElementById("create-question");
 var saveForm = document.getElementById("save-form");
+var deletequeize = document.getElementById("delete");
+var nameQueize = document.getElementById("name-quize");
+var selectedQueize ={
+	id:0,
+	name:""
+};
+
 
 
 
@@ -56,12 +63,21 @@ function buildGrid(tests) {
 		var deleteForm = document.createElement('button');
 		deleteForm.classList.add(arrTests[i].id, "btn-outline-danger","btn");
 		deleteForm.innerHTML = "Delete";
+		deleteForm.onclick = function (e) {
+			this.setAttribute("data-toggle","modal");
+			this.setAttribute ("data-target","#exampleModal")
+			selectedQueize.id = this.classList[0];
+			selectedQueize.name = this.parentElement.children[0].innerHTML;
+			console.log(selectedQueize.name);
+			nameQueize.innerHTML = selectedQueize.name;
+
+		};
+		
 		row.appendChild(deleteForm);
 		dinamicGridTests.appendChild(row);
-		deleteForm.onclick = function (e){
-			var id = this.classList[0];
+		deletequeize.onclick = function (e){
 			e.preventDefault();
-			services.quiz.DELETE(id,deleteElem);
+			services.quiz.DELETE(selectedQueize.id,deleteElem);
 		};
 
 	};

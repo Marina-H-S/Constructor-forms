@@ -11,7 +11,7 @@ var selectedQueize ={
 	id:0,
 	name:""
 };
-
+var questionType = 0;
 
 
 
@@ -117,13 +117,16 @@ addQuestion.onclick = function () {
 	addOptionBtn.innerHTML = "add option";
 	addOptionBtn.classList.add("btn", "btn-success", "my-btn");
 	btnWrap.appendChild(addOptionBtn);
-	
 	wrap.appendChild(btnWrap);
+	checkType(type);
 	div.appendChild(addOption());
 	addOptionBtn.onclick = function (e){
+		checkType(type);
 		e.preventDefault();
 		div.appendChild(addOption());
+	
 	};
+
 	var deleteQuestionBtn = document.createElement("button");
 	deleteQuestionBtn.innerHTML = "X";
 	deleteQuestionBtn.classList.add("btn", "btn-danger", "my-btn")
@@ -133,14 +136,7 @@ addQuestion.onclick = function () {
 	}
 	type.onchange = function(e){
 		
-		var questionType = 0;
-		for (var i= 0; i<type.children.length; i++){
-			var option = type.options[i];
-			if (option.selected){
-				questionType = option.value;
-			};
-	
-		}
+		checkType(this);
 		var imgs = [];
 		imgs = div.getElementsByClassName("img-size");
 		for (var j =0; j<imgs.length; j++){
@@ -162,6 +158,17 @@ addQuestion.onclick = function () {
 	}
 };
 
+function checkType(e) {
+	var select = e;
+
+	for (var i= 0; i<select.children.length; i++){
+		var option = select.options[i];
+		if (option.selected){
+			questionType = option.value;
+		}
+	};
+}
+
 
 function addOption() {
 	var wrapOpt = document.createElement("div");
@@ -170,8 +177,14 @@ function addOption() {
 	imgWrap.classList.add("option");
 	wrapOpt.appendChild(imgWrap);
 	var img = document.createElement("img");
-	img.setAttribute("src","radio.png");
 	img.classList.add("img-size");
+	if (questionType == "radio"){
+	img.setAttribute("src","radio.png");
+	};
+	if (questionType == "checkBox"){
+		img.setAttribute("src","checkbox.png");
+	};
+
 	imgWrap.appendChild(img);
 	var option = document.createElement("input");
 	option.setAttribute("placeholder","Enter option");
@@ -195,16 +208,9 @@ function createObjForm(){
 	var questionsArr = [];
 	for (var i =2; i<form.children.length; i++){
 		var question = {};
-
+		checkType(form.children[i].children[0]);
+		question.type = questionType;
 		question.name = form.children[i].children[1].children[0].value;
-		var type = 0;
-		for (var g=0; g<form.children[i].children[0].children.length; g++){
-			var option = form.children[i].children[0].options[g];
-			if (option.selected){
-				type = option.value;
-			};
-		};
-		question.type = type;
 		question.optionArr= [];
 		if(form.children[i].children.length < 2) continue;
 		for (var j =2; j<form.children[i].children.length; j++){
@@ -249,7 +255,7 @@ form.onclick = function(e){
 			sibling.remove();
 		};
 	};
-};
+}
 
 
 

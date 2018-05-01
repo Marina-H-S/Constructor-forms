@@ -93,6 +93,16 @@ addQuestion.onclick = function () {
 	var div = document.createElement("div");
 	div.classList.add("question-blok");
 	form.appendChild(div);
+	var type = document.createElement("select");
+	var radio = document.createElement("option");
+	radio.setAttribute("value","radio");
+	radio.innerHTML = "Radio";
+	type.appendChild(radio);
+	var checkBox = document.createElement("option");
+	checkBox.setAttribute("value","checkBox");
+	checkBox.innerHTML = "Check Box";
+	type.appendChild(checkBox);
+	div.appendChild(type);
 	var wrap = document.createElement("div");
 	wrap.classList.add("input-group");
 	div.appendChild(wrap);
@@ -121,11 +131,48 @@ addQuestion.onclick = function () {
 	deleteQuestionBtn.onclick =function(){
 		div.remove();
 	}
+	type.onchange = function(e){
+		
+		var questionType = 0;
+		for (var i= 0; i<type.children.length; i++){
+			var option = type.options[i];
+			if (option.selected){
+				questionType = option.value;
+			};
+	
+		}
+		var imgs = [];
+		imgs = div.getElementsByClassName("img-size");
+		for (var j =0; j<imgs.length; j++){
+			var parent =imgs[j].parentElement;
+			console.log(parent);
+			imgs[j].remove();
+			var img = document.createElement("img");
+
+			if (questionType == "radio"){
+				img.setAttribute("src","radio.png");
+			};
+			if (questionType == "checkBox"){
+				img.setAttribute("src","checkbox.png");
+			};
+			img.classList.add("img-size");
+			parent.appendChild(img);
+		};
+		
+	}
 };
+
 
 function addOption() {
 	var wrapOpt = document.createElement("div");
 	wrapOpt.classList.add("input-group");
+	var imgWrap = document.createElement("div");
+	imgWrap.classList.add("option");
+	wrapOpt.appendChild(imgWrap);
+	var img = document.createElement("img");
+	img.setAttribute("src","radio.png");
+	img.classList.add("img-size");
+	imgWrap.appendChild(img);
 	var option = document.createElement("input");
 	option.setAttribute("placeholder","Enter option");
 	option.classList.add("col-md-10", "form-control");
@@ -138,6 +185,7 @@ function addOption() {
 		wrapOpt.remove();
 	}
 	return wrapOpt;
+
 };
 
 function createObjForm(){
@@ -147,11 +195,20 @@ function createObjForm(){
 	var questionsArr = [];
 	for (var i =2; i<form.children.length; i++){
 		var question = {};
-		question.name = form.children[i].children[0].children[0].value;
+
+		question.name = form.children[i].children[1].children[0].value;
+		var type = 0;
+		for (var g=0; g<form.children[i].children[0].children.length; g++){
+			var option = form.children[i].children[0].options[g];
+			if (option.selected){
+				type = option.value;
+			};
+		};
+		question.type = type;
 		question.optionArr= [];
 		if(form.children[i].children.length < 2) continue;
-		for (var j =1; j<form.children[i].children.length; j++){
-			question.optionArr.push(form.children[i].children[j].children[0].value);
+		for (var j =2; j<form.children[i].children.length; j++){
+			question.optionArr.push(form.children[i].children[j].children[1].value);
 		};
 		questionsArr.push(question);
 	};
@@ -161,9 +218,11 @@ function createObjForm(){
 	var userRole = auth.getRoles();
 	formObj.auther = userRole[0];
 	//TO DO completeTestCounter
-	formObj.completeTestCounter =0; 
+	formObj.completeTestCounter =0;
+
 	console.log(formObj);
 	return formObj;
+
 };
 
 function validationForm(){
@@ -191,5 +250,6 @@ form.onclick = function(e){
 		};
 	};
 };
+
 
 

@@ -4,15 +4,29 @@ services = (function() {
             GET: getQuizes,
             POST: addQuiz,
             DELETE: deleteQuiz,
-            PUT: function(){ /*TODO*/ }
+            PUT: updateQuiz
         }
     }
+
+    function updateQuiz(quiz){
+        services.quiz.DELETE(quiz.id, console.log);
+        services.quiz.POST(quiz, console.log);
+    };
     
-    function getQuizes(callback) {
+    function getQuizes(callback, id) {
         console.log('getting quizes');
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function () {
-            if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+            if (id && xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                var tests = xmlHttp.responseText;
+                var arrTests = JSON.parse(tests);
+                for (var i = 0; i < arrTests.length; i++){
+                    if(arrTests[i].id == id){
+                        callback(arrTests[i]);
+                        break;
+                    }
+                }
+            } else if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
                 var tests = xmlHttp.responseText;
                 var arrTests = JSON.parse(tests);
                 callback(arrTests);
